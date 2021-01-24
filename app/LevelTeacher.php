@@ -14,7 +14,7 @@ class LevelTeacher extends Model
     {
         return $this->belongsTo('App\Admin');
     }
-    public function teacher()
+    public function teachers()
     {
         return $this->hasMany('App\User');
     }

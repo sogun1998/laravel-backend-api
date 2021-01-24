@@ -24,8 +24,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('verify_at')->nullable();
             $table->timestamp('create_at')->nullable();
             $table->timestamp('update_at')->nullable();
-//            $table->unsignedBigInteger('level_id');
-//            $table->foreign('level_id')->references('id')->on('level_teachers');
+            $table->unsignedBigInteger('level_id')->nullable();
+            $table->foreign('level_id')->references('id')->on('level_teachers');
             $table->timestamps();
         });
     }

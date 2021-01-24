@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LevelResource;
 use App\LevelTeacher;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LevelTeacherController extends Controller
 {
@@ -68,7 +70,7 @@ class LevelTeacherController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -123,5 +125,31 @@ class LevelTeacherController extends Controller
 
             ],
         ]);
+    }
+    public function findLevel(Request $request)
+    {
+        $level = LevelTeacher::query();
+
+        if ($request->has('level')) {
+            $level->where('level', 'LIKE', '%' . $request->level . '%');
+        }
+        if ($request->has('subject')) {
+            $level->where('subject', 'LIKE', '%' . $request->subject . '%');
+        }
+        if ($request->has('grade')) {
+            $level->where('grade', 'LIKE', '%' . $request->grade . '%');
+        }
+        if(!$level->get())
+//            return new LevelResource($level->get());
+            return response()->json([
+
+                'User' => $level->get(),
+            ],200);
+        else
+        return response()->json([
+            'status_code' => 404,
+            'message' => "Level not found",
+        ]);
+
     }
 }

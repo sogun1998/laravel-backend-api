@@ -35,11 +35,22 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::delete('/admin/level','LevelTeacherController@delete');
     Route::get('/admin/level','LevelTeacherController@getAll');
     Route::delete('/admin/level','LevelTeacherController@delete');
+    Route::post('/admin/level/findLevel','LevelTeacherController@findLevel');
     Route::get('/admin/posts','AdminController@getAllPosts');
     Route::post('/admin/level','LevelTeacherController@store');
     Route::get('/admin/logout','AdminController@logout');
     Route::get('/admin','AdminController@getAdmin');
-    Route::get('/teacher','UserManageController@index');
+
+
+    Route::get('/teacher','UserManageController@getAllUser');
+
+    Route::post('/teacher','UserManageController@store');
+    Route::put('/teacher/{id}','UserManageController@update');
+    Route::delete('/teacher/{id}','UserManageController@delete');
+    Route::get('/teacher/{id}','UserManageController@show');
+    Route::put('/addLevelTecher/{id}','UserManageController@addLevelTeacher');
+
+//    Route::get('/teacher','UserManageController@index');
 });
 
 
