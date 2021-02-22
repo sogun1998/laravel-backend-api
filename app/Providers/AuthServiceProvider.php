@@ -29,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'user' => 'The place only users can access.',
             'admin' => 'The place only admins can access',
+            'student'=> 'The place only students can access',
         ]);
 
         Passport::routes();

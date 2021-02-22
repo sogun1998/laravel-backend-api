@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
+//namespace App\Http\Controllers;
+namespace App\Http\Controllers\LevelManage;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\LevelResource;
 use App\LevelTeacher;
 use App\Post;

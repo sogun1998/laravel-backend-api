@@ -1,42 +1,33 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AccountManage;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentResource;
 
 use App\Http\Resources\UserResource;
-use App\LevelTeacher;
+use App\Student;
+
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class UserManageController extends Controller
+class StudentManageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getAllUser()
+    public function getAllStudent()
     {
         //
-        return UserResource::collection(User::all());
+        return StudentResource::collection(Student::all());
 //        return User::all();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $user = User::create([
+        $student = Student::create([
             'email' => $request->email,
             'name' => $request->name,
             'password' => bcrypt($request->password),
 
         ]);
-        return new UserResource($user);
+        return new StudentResource($student);
     }
 
     /**
@@ -47,9 +38,9 @@ class UserManageController extends Controller
      */
     public function show($id)
     {
-        if (User::where('id', $id)->exists()) {
-            $user = User::find($id);
-            return new UserResource($user);
+        if (Student::where('id', $id)->exists()) {
+            $student = Student::find($id);
+            return new StudentResource($student);
         } else {
             return response()->json([
                 "message" => "User not found"
@@ -67,8 +58,8 @@ class UserManageController extends Controller
     public function update(Request $request, int $id)
     {
         //
-        if (User::where('id', $id)->exists()) {
-            $user = User::find($id);
+        if (Student::where('id', $id)->exists()) {
+            $user = Student::find($id);
             $user->name = is_null($request->name) ? $user->name : $request->name;
             $user->email = is_null($request->email) ? $user->email : $request->email;
             $user->fullname = is_null($request->fullname) ? $user->fullname : $request->fullname;
@@ -78,13 +69,15 @@ class UserManageController extends Controller
 
 
             $user->save();
-
+            $user->touch();
             return response()->json([
-                "message" => "records updated successfully"
+                "message" => "Student updated successfully",
+                "user"=> new StudentResource($user)
+//                "user"=>$user)
             ], 200);
         } else {
             return response()->json([
-                "message" => "Teacher not found"
+                "message" => "Student not found"
             ], 404);
 
         }
@@ -100,40 +93,17 @@ class UserManageController extends Controller
     public function delete($id)
     {
         //
-        if(User::where('id', $id)->exists()) {
-            $user = User::find($id);
-            $user->delete();
+        if(Student::where('id', $id)->exists()) {
+            $student = Student::find($id);
+            $student->delete();
 
             return response()->json([
-                "message" => "records deleted"
+                "message" => "Student deleted"
             ], 202);
         } else {
             return response()->json([
-                "message" => "Teacher not found"
+                "message" => "Student not found"
             ], 404);
-        }
-    }
-    public function addLevelTeacher(Request $request, int $id)
-    {
-        if (User::where('id', $id)->exists()) {
-            $user = User::find($id);
-            $levelTeacher = LevelTeacher::create([
-                'admin_id'=>$request->user()->id,
-                'level'=>$request->level,
-                'subject'=>$request->subject,
-                'grade'=>$request->grade,
-                'canBeKeyTeacher'=> false,
-            ]);
-            $user->level_id = $levelTeacher ->id;
-            $user->save();
-            return response()->json([
-                "message" => "records updated successfully"
-            ]);
-        } else {
-            return response()->json([
-                "message" => "Teacher not found"
-            ], 404);
-
         }
     }
 }

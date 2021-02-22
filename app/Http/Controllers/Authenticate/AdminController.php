@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticate;
 
 use App\Admin;
 use App\Post;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -72,7 +72,8 @@ class AdminController extends Controller
             'message'=>'Admin has successfully logged in OTP.',
             'data'=>[
                 'admin'=>$admin,
-                'access_token'=>$access_token
+                'access_token'=>$access_token,
+                'role'=> 0
             ]
         ]);
     }

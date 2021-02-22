@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticate;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Controllers\Controller;
 use App\User;
 
 class UserController extends Controller
@@ -64,7 +64,8 @@ class UserController extends Controller
             'message'=>'User has successfully logged in OTP.',
             'data'=>[
                 'user'=>$user,
-                'access_token'=>$access_token
+                'access_token'=>$access_token,
+                'role'=>1
             ]
         ]);
     }
@@ -86,7 +87,8 @@ class UserController extends Controller
         $user = $request->user();
         return response()->json([
             'status_code'=>200 ,
-            'data'=>$user
+            'data'=>$user,
+            'role'=> 1
         ]);
     }
 

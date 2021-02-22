@@ -26,39 +26,52 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
 
     Route::delete('/user/post','PostController@destroy');
 
-    Route::get('/user/logout','UserController@logout');
-    Route::get('/user','UserController@getUser');
+    Route::get('/user/logout','Authenticate\UserController@logout');
+    Route::get('/user','Authenticate\UserController@getUser');
 });
 
 Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
 
-    Route::delete('/admin/level','LevelTeacherController@delete');
-    Route::get('/admin/level','LevelTeacherController@getAll');
-    Route::delete('/admin/level','LevelTeacherController@delete');
-    Route::post('/admin/level/findLevel','LevelTeacherController@findLevel');
-    Route::get('/admin/posts','AdminController@getAllPosts');
-    Route::post('/admin/level','LevelTeacherController@store');
-    Route::get('/admin/logout','AdminController@logout');
-    Route::get('/admin','AdminController@getAdmin');
+    Route::delete('/admin/level','LevelManage\LevelTeacherController@delete');
+    Route::get('/admin/level','LevelManage\LevelTeacherController@getAll');
+    Route::delete('/admin/level','LevelManage\LevelTeacherController@delete');
+    Route::post('/admin/level/findLevel','LevelManage\LevelTeacherController@findLevel');
+//    Route::get('/admin/posts','AdminController@getAllPosts');
+    Route::post('/admin/level','LevelManage\LevelTeacherController@store');
+    Route::get('/admin/logout','Authenticate\AdminController@logout');
+    Route::get('/admin','Authenticate\AdminController@getAdmin');
 
 
-    Route::get('/teacher','UserManageController@getAllUser');
-
-    Route::post('/teacher','UserManageController@store');
-    Route::put('/teacher/{id}','UserManageController@update');
-    Route::delete('/teacher/{id}','UserManageController@delete');
-    Route::get('/teacher/{id}','UserManageController@show');
-    Route::put('/addLevelTecher/{id}','UserManageController@addLevelTeacher');
+    Route::get('/teacher','AccountManage\UserManageController@getAllUser');
+    Route::post('/teacher','AccountManage\UserManageController@store');
+    Route::put('/teacher/{id}','AccountManage\UserManageController@update');
+    Route::delete('/teacher/{id}','AccountManage\UserManageController@delete');
+    Route::get('/teacher/{id}','AccountManage\UserManageController@show');
+    Route::put('/addLevelTecher/{id}','AccountManage\UserManageController@addLevelTeacher');
 
 //    Route::get('/teacher','UserManageController@index');
+
+    Route::get('/student','AccountManage\StudentManageController@getAllStudent');
+    Route::post('/student','AccountManage\StudentManageController@store');
+    Route::put('/student/{id}','AccountManage\StudentManageController@update');
+    Route::delete('/student/{id}','AccountManage\StudentManageController@delete');
+    Route::get('/student/{id}','AccountManage\StudentManageController@show');
 });
 
+Route::middleware(['auth:student','studentTokenValidate'])->group(function (){
+    Route::get('/student/logout','Authenticate\StudentLoginController@logout');
+//    Route::get('/','Authenticate\AdminController@getAdmin');
+});
 
-Route::post('/user/register','UserController@register');
+Route::post('/user/register','Authenticate\UserController@register');
 
-Route::post('/user/login','UserController@login');
+Route::post('/user/login','Authenticate\UserController@login');
 
 
-Route::post('/admin/register','AdminController@register');
+Route::post('/admin/register','Authenticate\AdminController@register');
 
-Route::post('/admin/login','AdminController@login');
+Route::post('/admin/login','Authenticate\AdminController@login');
+
+Route::post('/student/register','Authenticate\StudentLoginController@register');
+
+Route::post('/student/login','Authenticate\StudentLoginController@login');
