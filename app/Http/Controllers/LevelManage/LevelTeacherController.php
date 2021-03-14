@@ -137,9 +137,9 @@ class LevelTeacherController extends Controller
         if ($request->has('subject')) {
             $level->where('subject', 'LIKE', '%' . $request->subject . '%');
         }
-        if ($request->has('grade')) {
-            $level->where('grade', 'LIKE', '%' . $request->grade . '%');
-        }
+//        if ($request->has('grade')) {
+//            $level->where('grade', 'LIKE', '%' . $request->grade . '%');
+//        }
         if(!$level->get())
 //            return new LevelResource($level->get());
             return response()->json([

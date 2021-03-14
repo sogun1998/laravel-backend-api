@@ -16,12 +16,15 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'fullname' =>  $this->fullname,
             'name' => $this->name,
             'phone' => $this->phone,
             'email' =>  $this->email,
             'gender' =>  $this->gender,
-//            'created_at' => (string) $this->created_at,
-            'level' => $this->level
+//            'fullname' =>  $this->fullname,
+            'created_at' => (string) $this->created_at,
+//            'level' => $this->level,
+            'level' => new LevelResource($this->level)
         ];
     }
 }

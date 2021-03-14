@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LevelTeacher extends Model
 {
     protected $fillable = [
-        'admin_id', 'level', 'subject','grade'
+        'admin_id', 'level', 'subject'
     ];
 
     public function admin()

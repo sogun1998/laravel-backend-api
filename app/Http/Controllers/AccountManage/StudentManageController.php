@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\AccountManage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentCollection;
 use App\Http\Resources\StudentResource;
 
-use App\Http\Resources\UserResource;
+
 use App\Student;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentManageController extends Controller
 {
     public function getAllStudent()
     {
         //
-        return StudentResource::collection(Student::all());
+//        return StudentResource::collection(Student::all());
+        return new StudentCollection(Student::paginate(10));
 //        return User::all();
+    }
+    public function getTotalStudent(){
+        return Student::count();
     }
     public function store(Request $request)
     {
@@ -106,4 +112,10 @@ class StudentManageController extends Controller
             ], 404);
         }
     }
+    public function multiDelete(Request $request){
+        $ids = $request->ids;
+        DB::table("students")->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(["message" => "Student deleted"]);
+    }
+
 }

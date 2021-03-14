@@ -17,7 +17,7 @@ class CreateLevelTeachersTable extends Migration
             $table->id();
             $table->string('level');
             $table->string('subject');
-            $table->integer('grade');
+//            $table->integer('grade');
             $table->string('canBeKeyTeacher')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins');

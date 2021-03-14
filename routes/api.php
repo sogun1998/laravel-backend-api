@@ -42,20 +42,23 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::get('/admin','Authenticate\AdminController@getAdmin');
 
 
-    Route::get('/teacher','AccountManage\UserManageController@getAllUser');
+    Route::get('/admin/teacher','AccountManage\UserManageController@getAllUser');
+    Route::get('/teacher','AccountManage\UserManageController@getTotalTeacher');
     Route::post('/teacher','AccountManage\UserManageController@store');
     Route::put('/teacher/{id}','AccountManage\UserManageController@update');
     Route::delete('/teacher/{id}','AccountManage\UserManageController@delete');
     Route::get('/teacher/{id}','AccountManage\UserManageController@show');
     Route::put('/addLevelTecher/{id}','AccountManage\UserManageController@addLevelTeacher');
+    Route::post('/teacher/delete', 'AccountManage\UserManageController@multiDelete');
 
 //    Route::get('/teacher','UserManageController@index');
-
-    Route::get('/student','AccountManage\StudentManageController@getAllStudent');
+    Route::get('/student','AccountManage\StudentManageController@getTotalStudent');
+    Route::get('/admin/student','AccountManage\StudentManageController@getAllStudent');
     Route::post('/student','AccountManage\StudentManageController@store');
     Route::put('/student/{id}','AccountManage\StudentManageController@update');
     Route::delete('/student/{id}','AccountManage\StudentManageController@delete');
     Route::get('/student/{id}','AccountManage\StudentManageController@show');
+    Route::post('/student/delete', 'AccountManage\StudentManageController@multiDelete');
 });
 
 Route::middleware(['auth:student','studentTokenValidate'])->group(function (){

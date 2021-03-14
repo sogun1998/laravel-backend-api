@@ -21,9 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gender')->nullable();
-            $table->timestamp('verify_at')->nullable();
-            $table->timestamp('create_at')->nullable();
-            $table->timestamp('update_at')->nullable();
+            $table->string('school')->nullable();
+//            $table->timestamp('verify_at')->nullable();
+//            $table->timestamp('create_at')->nullable();
+//            $table->timestamp('update_at')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
             $table->foreign('level_id')->references('id')->on('level_teachers');
             $table->timestamps();

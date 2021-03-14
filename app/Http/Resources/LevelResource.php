@@ -18,9 +18,9 @@ class LevelResource extends JsonResource
             'id' => $this->id,
             'level' => $this->level,
             'subject' => $this->subject,
-            'grade' =>  $this->grade,
+//            'grade' =>  $this->grade,
             'canBeKeyTeacher' =>  $this->canBeKeyTeacher,
-            'teacher' =>  $this->teacher,
+//            'teacher' =>  $this->teacher,
             'create_by' => $this->admin
         ];
 

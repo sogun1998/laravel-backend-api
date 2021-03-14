@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\AccountManage;
 
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\LevelTeacher;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserManageController extends Controller
@@ -20,13 +22,16 @@ class UserManageController extends Controller
     {
         //
 //        return UserResource::collection(User::all());
-       return User::paginate();
+//       return User::paginate();
+        return new UserCollection(User::paginate(10));
 //        return response()->json([
 //            "" => "records updated successfully"
 //        ], 200);
 ////        return User::all();
     }
-
+    public function getTotalTeacher(){
+        return User::count();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -126,13 +131,16 @@ class UserManageController extends Controller
                 'admin_id'=>$request->user()->id,
                 'level'=>$request->level,
                 'subject'=>$request->subject,
-                'grade'=>$request->grade,
-                'canBeKeyTeacher'=> false,
+//                'grade'=>$request->grade,
+                'canBeKeyTeacher'=> $request->canBeKeyTeacher,
             ]);
+            $levelTeacher->canBeKeyTeacher = $request->canBeKeyTeacher;
             $user->level_id = $levelTeacher ->id;
             $user->save();
+            $levelTeacher->save();
             return response()->json([
-                "message" => "records updated successfully"
+                "message" => "records updated successfully",
+//                "canBeKeyTeacher" =>$levelTeacher
             ]);
         } else {
             return response()->json([
@@ -140,5 +148,10 @@ class UserManageController extends Controller
             ], 404);
 
         }
+    }
+    public function multiDelete(Request $request){
+        $ids = $request->ids;
+        DB::table("users")->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(["message" => "Teacher deleted"]);
     }
 }
