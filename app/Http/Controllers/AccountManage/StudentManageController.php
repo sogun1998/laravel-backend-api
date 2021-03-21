@@ -112,6 +112,72 @@ class StudentManageController extends Controller
             ], 404);
         }
     }
+    public function upload(Request $request){
+//        $students = $request->data;
+//        $count = 0;
+//        foreach ($students as $student) {
+//            $input = Student::create(
+//                [
+//                    'email' => $student['email'],
+//                    'name' => $student['name'],
+//                    'password' => bcrypt($student['password'])
+////                    'fullname' => $teacher['fullname'],
+////                    'gender' => $teacher['gender'],
+////                    'phone' => $teacher['phone'],
+////                    'school' => $teacher['school']
+//                ]
+//            );
+//            $input->fullname = $student['fullname'];
+//            $input->gender =$student['gender'];
+//            $input->phone =$student['phone'];
+////            $input->school =$student['school'];
+//            $input->save();
+//            $input->touch();
+//            $count++;
+//        }
+        $students = $request->data;
+        $count = 0;
+        DB::beginTransaction();
+        try {
+            foreach ($students as $student) {
+                $input = Student::create(
+                [
+                    'email' => $student['email'],
+                    'name' => $student['name'],
+                    'password' => bcrypt($student['password'])
+//                    'fullname' => $teacher['fullname'],
+//                    'gender' => $teacher['gender'],
+//                    'phone' => $teacher['phone'],
+//                    'school' => $teacher['school']
+                ]
+            );
+            $input->fullname = $student['fullname'];
+            $input->gender =$student['gender'];
+            $input->phone =$student['phone'];
+//            $input->school =$student['school'];
+            $input->save();
+            $input->touch();
+            $count++;
+//                DB::insert('insert into students (email, name, password,fullname,gender,phone) values (?, ?, ?, ?, ?, ?)', [$student['email'], $student['name'], $student['password'], $student['email'], $student['fullname'], $student['gender'], $student['phone']]);
+        }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            throw new Exception($e->getMessage());
+//            return response()->json([
+//                "message" => $e->getMessage(),
+////                "Total created" => $count
+//            ]);
+
+        }
+        return response()->json([
+            "message" => "Created success",
+            "Total created" => $count
+        ]);
+
+
+    }
     public function multiDelete(Request $request){
         $ids = $request->ids;
         DB::table("students")->whereIn('id',explode(",",$ids))->delete();

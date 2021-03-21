@@ -49,7 +49,9 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::delete('/teacher/{id}','AccountManage\UserManageController@delete');
     Route::get('/teacher/{id}','AccountManage\UserManageController@show');
     Route::put('/addLevelTecher/{id}','AccountManage\UserManageController@addLevelTeacher');
+    Route::put('/updateLevelTecher/{id}','AccountManage\UserManageController@updateLevelTeacher');
     Route::post('/teacher/delete', 'AccountManage\UserManageController@multiDelete');
+    Route::put('/admin/teacher/upload','AccountManage\UserManageController@upload');
 
 //    Route::get('/teacher','UserManageController@index');
     Route::get('/student','AccountManage\StudentManageController@getTotalStudent');
@@ -59,6 +61,7 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::delete('/student/{id}','AccountManage\StudentManageController@delete');
     Route::get('/student/{id}','AccountManage\StudentManageController@show');
     Route::post('/student/delete', 'AccountManage\StudentManageController@multiDelete');
+    Route::put('/admin/student/upload','AccountManage\StudentManageController@upload');
 });
 
 Route::middleware(['auth:student','studentTokenValidate'])->group(function (){

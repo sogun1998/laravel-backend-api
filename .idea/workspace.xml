@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="906d0343-9436-4ed4-9e90-91cd72bec181" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/a-very-simple-multi-auth-using-laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/a-very-simple-multi-auth-using-laravel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/StudentManageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/StudentManageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/UserManageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/UserManageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LevelManage/LevelTeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LevelManage/LevelTeacherController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/LevelResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/LevelResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/StudentResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/StudentResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/UserResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/LevelTeacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/LevelTeacher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_17_082817_create_level_teachers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_17_082817_create_level_teachers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_18_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_18_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_25_100728_create_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_25_100728_create_students_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -202,7 +193,8 @@
       <workItem from="1611830042037" duration="671000" />
       <workItem from="1613528923082" duration="12915000" />
       <workItem from="1614240029385" duration="7389000" />
-      <workItem from="1615134373419" duration="6312000" />
+      <workItem from="1615134373419" duration="16050000" />
+      <workItem from="1615951550304" duration="5761000" />
     </task>
     <servers />
   </component>

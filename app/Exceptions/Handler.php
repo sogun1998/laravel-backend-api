@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -50,6 +51,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof QueryException) {
+            return response()->json([
+                "message" => "Querry Error",
+//                "Total created" => $count
+            ],500);
+        }
+
         return parent::render($request, $exception);
     }
+//        return parent::render($request, $exception);
+//    }
 }
