@@ -72,7 +72,7 @@ class StudentManageController extends Controller
             $user->phone = is_null($request->phone) ? $user->phone : $request->phone;
             $user->gender = is_null($request->gender) ? $user->gender : $request->gender;
             $user->password = is_null($request->password) ? $user->password : bcrypt($request->password);
-
+            $user->firstLogin = is_null($request->firstLogin) ? $user->firstLogin : $request->firstLogin;
 
             $user->save();
             $user->touch();

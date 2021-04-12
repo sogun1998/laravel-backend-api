@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration
 //            $table->timestamp('create_at')->nullable();
 //            $table->timestamp('update_at')->nullable();
             $table->string('school')->nullable();
-//            $table->boolean('firtLogin')->default(false);
+            $table->boolean('firstLogin')->default(false);
             $table->timestamps();
         });
     }

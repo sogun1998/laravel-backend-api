@@ -23,6 +23,7 @@ class StudentCollection extends ResourceCollection
                     'phone' => $student->phone,
                     'email' =>  $student->email,
                     'gender' =>  $student->gender,
+                    'school'=>$student->school
 //            'created_at' => (string) $this->created_at,
 //                    'level' => $student->level
                 ];

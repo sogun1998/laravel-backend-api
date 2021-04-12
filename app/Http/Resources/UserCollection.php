@@ -23,6 +23,7 @@ class UserCollection extends ResourceCollection
                     'phone' => $user->phone,
                     'email' =>  $user->email,
                     'gender' =>  $user->gender,
+                    'school' => $user->school,
 //            'created_at' => (string) $this->created_at,
                     'level' => $user->level
                 ];

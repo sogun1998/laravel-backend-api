@@ -24,6 +24,7 @@ class UserResource extends JsonResource
 //            'fullname' =>  $this->fullname,
             'created_at' => (string) $this->created_at,
 //            'level' => $this->level,
+            'school' => $this->school,
             'level' => new LevelResource($this->level)
         ];
     }

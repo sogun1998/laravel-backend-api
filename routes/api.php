@@ -28,6 +28,7 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
 
     Route::get('/user/logout','Authenticate\UserController@logout');
     Route::get('/user','Authenticate\UserController@getUser');
+    Route::put('/user/{id}','AccountManage\UserManageController@update');
 });
 
 Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
@@ -57,7 +58,7 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::get('/student','AccountManage\StudentManageController@getTotalStudent');
     Route::get('/admin/student','AccountManage\StudentManageController@getAllStudent');
     Route::post('/student','AccountManage\StudentManageController@store');
-    Route::put('/student/{id}','AccountManage\StudentManageController@update');
+    Route::put('/admin/student/{id}','AccountManage\StudentManageController@update');
     Route::delete('/student/{id}','AccountManage\StudentManageController@delete');
     Route::get('/student/{id}','AccountManage\StudentManageController@show');
     Route::post('/student/delete', 'AccountManage\StudentManageController@multiDelete');
@@ -66,6 +67,7 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
 
 Route::middleware(['auth:student','studentTokenValidate'])->group(function (){
     Route::get('/student/logout','Authenticate\StudentLoginController@logout');
+    Route::put('/student/{id}','AccountManage\StudentManageController@update');
 //    Route::get('/','Authenticate\AdminController@getAdmin');
 });
 
