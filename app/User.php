@@ -43,9 +43,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\LevelTeacher');
     }
+    public function class()
+    {
+        return $this->hasOne('App\Lophoc');
+    }
     public function OauthAcessToken()
     {
         return $this->hasMany('App\OauthAccessToken');
     }
+
 
 }

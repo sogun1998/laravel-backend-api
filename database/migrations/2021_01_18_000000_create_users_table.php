@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('level_id')->nullable();
             $table->boolean('firstLogin')->default(false);
             $table->foreign('level_id')->references('id')->on('level_teachers');
+//            $table->unsignedBigInteger('class_id')->nullable();
+//            $table->foreign('class_id')->references('id')->on('lophocs');
             $table->timestamps();
         });
     }

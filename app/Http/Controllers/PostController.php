@@ -12,7 +12,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get(Request $request)
+    public function ge(Request $request)
     {
         return response()->json([
             'status_code' => 200,

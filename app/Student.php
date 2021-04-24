@@ -21,4 +21,27 @@ class Student extends Authenticatable
     {
         return $this->hasMany('App\OauthAccessToken','user_id','id');
     }
+    public function class()
+    {
+        return $this->belongsTo('App\Lophoc');
+    }
+    public function scopeFullname($query, $request)
+    {
+        if ($request->has('fullname')) {
+            $query->where('fullname', 'LIKE', '%' . $request->fullname . '%');
+        }
+
+        return $query;
+    }
+    public function scopeName($query, $request)
+    {
+        if ($request->has('name')) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        return $query;
+    }
+
+
+
 }

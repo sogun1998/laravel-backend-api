@@ -4,8 +4,13 @@
 namespace App\Http\Controllers\LevelManage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LevelResource;
+use App\Http\Resources\TeacherWithLevelCollection;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\LevelTeacher;
 use App\Post;
+use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -153,4 +158,19 @@ class LevelTeacherController extends Controller
         ]);
 
     }
+    public function teccherCanbeKey(){
+        $users = DB::table('users')
+            ->whereNotNull('level_id')->get();
+//        $users = User::where('id', 1)->get();
+        $teacher = $users->reject(function ($value, $key) {
+            if(User::find($value->id)->level->canBeKeyTeacher !== "Có")
+            return $value;
+        });
+        return response()->json([
+
+            'User' => new TeacherWithLevelCollection($teacher),
+//            'User' => $teacher,
+        ],200);
+    }
+
 }

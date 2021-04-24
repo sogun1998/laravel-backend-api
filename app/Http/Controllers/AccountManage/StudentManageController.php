@@ -7,6 +7,7 @@ use App\Http\Resources\StudentCollection;
 use App\Http\Resources\StudentResource;
 
 
+use App\Lophoc;
 use App\Student;
 
 use App\User;
@@ -113,30 +114,13 @@ class StudentManageController extends Controller
         }
     }
     public function upload(Request $request){
-//        $students = $request->data;
-//        $count = 0;
-//        foreach ($students as $student) {
-//            $input = Student::create(
-//                [
-//                    'email' => $student['email'],
-//                    'name' => $student['name'],
-//                    'password' => bcrypt($student['password'])
-////                    'fullname' => $teacher['fullname'],
-////                    'gender' => $teacher['gender'],
-////                    'phone' => $teacher['phone'],
-////                    'school' => $teacher['school']
-//                ]
-//            );
-//            $input->fullname = $student['fullname'];
-//            $input->gender =$student['gender'];
-//            $input->phone =$student['phone'];
-////            $input->school =$student['school'];
-//            $input->save();
-//            $input->touch();
-//            $count++;
-//        }
+//
         $students = $request->data;
         $count = 0;
+//        foreach ($students as $student) {
+//            $class = Lophoc::where("classname",$student['classname'])->where("school",$student['school'])->get();
+//        }
+
         DB::beginTransaction();
         try {
             foreach ($students as $student) {
@@ -145,16 +129,16 @@ class StudentManageController extends Controller
                     'email' => $student['email'],
                     'name' => $student['name'],
                     'password' => bcrypt($student['password'])
-//                    'fullname' => $teacher['fullname'],
-//                    'gender' => $teacher['gender'],
-//                    'phone' => $teacher['phone'],
-//                    'school' => $teacher['school']
+//
                 ]
             );
             $input->fullname = $student['fullname'];
             $input->gender =$student['gender'];
             $input->phone =$student['phone'];
+//            $input->phone =$student['phone'];
 //            $input->school =$student['school'];
+            $class = Lophoc::where("classname",$student['classname'])->where("school",$student['school'])->get();
+            $input->lophoc_id = $class[0]->id;
             $input->save();
             $input->touch();
             $count++;
@@ -173,7 +157,8 @@ class StudentManageController extends Controller
         }
         return response()->json([
             "message" => "Created success",
-            "Total created" => $count
+            "Total created" => $count,
+//            "class" => $class[0]->id
         ]);
 
 
@@ -182,6 +167,22 @@ class StudentManageController extends Controller
         $ids = $request->ids;
         DB::table("students")->whereIn('id',explode(",",$ids))->delete();
         return response()->json(["message" => "Student deleted"]);
+    }
+
+    public function search(Request $request)
+    {
+//        $student = Student::query()
+//            ->fullname($request->keyword)
+//            ->name($request->keyword);
+
+        $student = Student::where('fullname', 'LIKE','%'.$request->keyword.'%')
+            ->where('lophoc_id', '=',null)
+            ->get();
+        return response()->json([
+//            "message" => "Class updated successfully",
+            "student"=> $student,
+            "count" => $student->count()
+        ], 200);
     }
 
 }

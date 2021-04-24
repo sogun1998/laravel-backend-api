@@ -5,6 +5,8 @@ namespace App\Http\Controllers\AccountManage;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\LevelTeacher;
+use App\Lophoc;
+use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -220,6 +222,28 @@ class UserManageController extends Controller
         $ids = $request->ids;
         DB::table("users")->whereIn('id',explode(",",$ids))->delete();
         return response()->json(["message" => "Teacher deleted"]);
+    }
+    public function analyze($id){
+        if (User::where('id', $id)->exists()) {
+            $user = User::find($id);
+//            return new UserResource($user);
+            $count_form_class = Lophoc::where('teacher_id',$id)->get('id');
+            $count_form_students = 0;
+            foreach ($count_form_class as $class){
+                $count_form_student = Student::where('lophoc_id', '=', $class->id)->count();
+                $count_form_students += $count_form_student;
+            }
+            return response()->json([
+                "count_form_class" => $count_form_class->count(),
+                "count_form_student" => $count_form_students,
+                "count_class_teach" => 0,
+                "count_student_teach" =>0
+            ],200);
+        } else {
+            return response()->json([
+                "message" => "User not found"
+            ], 404);
+        }
     }
 
 
