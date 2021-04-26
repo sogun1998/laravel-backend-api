@@ -11,6 +11,7 @@ use App\Lophoc;
 use App\Student;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -132,6 +133,8 @@ class StudentManageController extends Controller
 //
                 ]
             );
+                $birthday = Carbon::createFromDate($student['birthdayYear'], $student['birthdayMonth'], $student['birthdayDate'], 'Asia/Ho_Chi_Minh');
+                $input->birthday = $birthday;
             $input->fullname = $student['fullname'];
             $input->gender =$student['gender'];
             $input->phone =$student['phone'];

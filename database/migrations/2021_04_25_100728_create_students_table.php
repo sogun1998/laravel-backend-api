@@ -24,6 +24,7 @@ class CreateStudentsTable extends Migration
 //            $table->timestamp('verify_at')->nullable();
 //            $table->timestamp('create_at')->nullable();
 //            $table->timestamp('update_at')->nullable();
+            $table->date('birthday')->nullable();
             $table->unsignedBigInteger('lophoc_id')->nullable();
             $table->foreign('lophoc_id')->references('id')->on('lophocs')->onDelete('cascade');;
             $table->string('school')->nullable();

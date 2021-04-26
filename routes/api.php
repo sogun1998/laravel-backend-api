@@ -84,6 +84,12 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::delete('/class/{id}','ClassManage\ClassController@delete');
 //    Route::post('/search','ClassManage\ClassController@search');
 
+    Route::post('/admin/subject','SubjectManage\SubjectController@store');
+    Route::put('/admin/subject/{id}','SubjectManage\SubjectController@update');
+    Route::post('/admin/assign/upload','AssignManage\AssignController@upload');
+    Route::delete('/admin/assign/{id}','AssignManage\AssignController@delete');
+
+
 
 });
 

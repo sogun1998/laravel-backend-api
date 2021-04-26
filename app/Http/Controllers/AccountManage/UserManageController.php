@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class UserManageController extends Controller
@@ -183,6 +184,7 @@ class UserManageController extends Controller
     public function upload(Request $request){
         $teachers = $request->data;
         $count = 0;
+        $date  = Carbon::now();
         DB::beginTransaction();
         try {
             foreach ($teachers as $teacher) {
@@ -197,6 +199,8 @@ class UserManageController extends Controller
 //                    'school' => $teacher['school']
                 ]
             );
+            $birthday = Carbon::createFromDate($teacher['birthdayYear'], $teacher['birthdayMonth'], $teacher['birthdayDate'], 'Asia/Ho_Chi_Minh');
+            $input->birthday = $birthday;
             $input->fullname = $teacher['fullname'];
             $input->gender =$teacher['gender'];
             $input->phone =$teacher['phone'];
@@ -214,7 +218,8 @@ class UserManageController extends Controller
         }
         return response()->json([
             "message" => "Created success",
-            "Total created" => $count
+            "Total created" => $count,
+            "Date" => $birthday
             ]);
 
     }

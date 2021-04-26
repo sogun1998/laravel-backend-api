@@ -18,6 +18,10 @@ class Lophoc extends Model
     {
         return $this->hasMany('App\Student');
     }
+    public function classsubject()
+    {
+        return $this->hasMany('App\ClassSubject');
+    }
 
 
 }

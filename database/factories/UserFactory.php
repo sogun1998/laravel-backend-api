@@ -3,9 +3,11 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Buihuycuong\Vnfaker\VNFaker;
 use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,8 @@ $factory->define(User::class, function (Faker $faker) {
     $lastname = vnfaker()->lastname();
     $midname = vnfaker()->midname();
     $fullname = $lastname." ".$midname." ".$firtname;
+    $now = Carbon::now();
+    $random = vnfaker()->numberBetween($min = 10, $max = 20);
     return [
         'fullname'=>$fullname,
 //        'name' => $faker->name,
@@ -31,7 +35,8 @@ $factory->define(User::class, function (Faker $faker) {
         // 'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'phone'=> vnfaker()->mobilephone($numbers = 10),
-        'gender'=> vnfaker()->gender()
+        'gender'=> vnfaker()->gender(),
+        'birthday' => $now->subYear($random)
         // 'remember_token' => Str::random(10),
     ];
 });

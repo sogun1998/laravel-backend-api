@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
 //            $table->timestamp('verify_at')->nullable();
 //            $table->timestamp('create_at')->nullable();
 //            $table->timestamp('update_at')->nullable();
+            $table->date('birthday')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
             $table->boolean('firstLogin')->default(false);
             $table->foreign('level_id')->references('id')->on('level_teachers');
