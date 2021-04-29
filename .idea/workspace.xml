@@ -3,18 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="906d0343-9436-4ed4-9e90-91cd72bec181" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/StudentManageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/StudentManageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Achievement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ClassSubject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClassSubject.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/UserManageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/UserManageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Lophoc.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Lophoc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AssignManage/AssignController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AssignManage/AssignController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Authenticate/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Authenticate/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubjectManage/SubjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubjectManage/SubjectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/SubjectResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/SubjectResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mark.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mark.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/MarkDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MarkDetail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Student.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/factories/StudentFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/StudentFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_18_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_18_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_24_021959_create_subjects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_24_021959_create_subjects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_25_100728_create_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_25_100728_create_students_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,7 +203,7 @@
       <workItem from="1615134373419" duration="16050000" />
       <workItem from="1615951550304" duration="11801000" />
       <workItem from="1617333789764" duration="76279000" />
-      <workItem from="1619344037258" duration="12103000" />
+      <workItem from="1619344037258" duration="30970000" />
     </task>
     <servers />
   </component>

@@ -6,6 +6,7 @@ use App\Student;
 use Faker\Generator as Faker;
 use Buihuycuong\Vnfaker\VNFaker;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 $factory->define(Student::class, function (Faker $faker) {
     $firtname = vnfaker()->firstame();
@@ -22,9 +23,10 @@ $factory->define(Student::class, function (Faker $faker) {
         // 'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'phone'=> vnfaker()->mobilephone($numbers = 10),
-        'gender'=> vnfaker()->gender(),
+        'gender'=> Str::ucfirst(vnfaker()->gender()),
 //        'birthday' => vnfaker()->date($symbol = '-')
-        'birthday' => $now->subYear($random)
+        'birthday' => $now->subYear($random),
+        'lophoc_id' => 2
         // 'remember_token' => Str::random(10),
     ];
 });

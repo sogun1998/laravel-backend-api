@@ -4,6 +4,8 @@ namespace App\Http\Controllers\AssignManage;
 
 use App\ClassSubject;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AssignCollection;
+use App\Http\Resources\AssignResource;
 use App\Lophoc;
 use App\Student;
 use App\Subject;
@@ -16,6 +18,11 @@ class AssignController extends Controller
 {
     //
 //    public function
+    public function index()
+    {
+        //
+        return new AssignCollection(ClassSubject::paginate(10));
+    }
     public function upload(Request $request){
 //
         $assignments = $request->data;
@@ -32,7 +39,7 @@ class AssignController extends Controller
                     ->where("birthday",$birthday->toDateString())
                     ->get();
                 $class = Lophoc::where("classname",$assignment['classname'])->where("school",$assignment['school'])->get();
-                $subject = Subject::where("subjectname",$assignment['subjectname'])->where("school",$assignment['school'])->get();
+                $subject = Subject::where("subjectname",$assignment['subjectname'])->where("school",$assignment['school'])->where("grade",$assignment['grade'])->get();
               $input = ClassSubject::create(
                 [
                     'lophoc_id' =>$class[0]->id,
@@ -87,6 +94,17 @@ class AssignController extends Controller
         } else {
             return response()->json([
                 "message" => "Relative not found"
+            ], 404);
+        }
+    }
+    public function show($id)
+    {
+        if (ClassSubject::where('id', $id)->exists()) {
+            $assign = ClassSubject::find($id);
+            return new AssignResource($assign);
+        } else {
+            return response()->json([
+                "message" => "Class not found"
             ], 404);
         }
     }

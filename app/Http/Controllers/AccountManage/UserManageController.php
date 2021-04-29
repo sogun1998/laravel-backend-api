@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\AccountManage;
 
+use App\ClassSubject;
+use App\Http\Resources\AssignCollection;
+use App\Http\Resources\AssignResource;
+use App\Http\Resources\ClassCollection;
+use App\Http\Resources\ClassResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\LevelTeacher;
@@ -243,6 +248,22 @@ class UserManageController extends Controller
                 "count_form_student" => $count_form_students,
                 "count_class_teach" => 0,
                 "count_student_teach" =>0
+            ],200);
+        } else {
+            return response()->json([
+                "message" => "User not found"
+            ], 404);
+        }
+    }
+    public function teacherStatus($id){
+        if (User::where('id', $id)->exists()) {
+            $user = User::find($id);
+            $classes = Lophoc::where('teacher_id',$id)->get();
+//            $class = Lophoc::find()
+            $assign = ClassSubject::where('teacher_id',$id)->get();
+            return response()->json([
+                "classByKeyTeacher" => $classes,
+                "classTeach" => new AssignCollection($assign),
             ],200);
         } else {
             return response()->json([

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Authenticate;
 
+use App\ClassSubject;
+use App\Lophoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
@@ -57,7 +59,8 @@ class UserController extends Controller
         $user->OauthAcessToken()->where('name','user')->delete();
         $access_token = $user->createToken('user',['user'])->accessToken;
         //LOGIN
-
+        $keyClass = Lophoc::where('teacher_id',$user->id)->get('id');
+        $teachClass = ClassSubject::select('lophoc_id','subject_id')->where('teacher_id',$user->id)->get();
         //RETURN DATA WITH access_TOKEN
         return response()->json([
             'status_code'=>200 ,
@@ -65,7 +68,9 @@ class UserController extends Controller
             'data'=>[
                 'user'=>$user,
                 'access_token'=>$access_token,
-                'role'=>1
+                'role'=>1,
+                'keyClass' => $keyClass,
+                'teachClass' => $teachClass
             ]
         ]);
     }

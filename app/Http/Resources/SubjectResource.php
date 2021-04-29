@@ -23,7 +23,7 @@ class SubjectResource extends JsonResource
             'grade' => $this->grade,
 //            'email' =>  $this->email,
 //            'gender' =>  $this->gender,
-//            'school' => $this->school,
+            'school' => $this->school,
 //            'update_at' => (string) $this->updated_at,
 //            'level' => $this->level
         ];

@@ -39,6 +39,7 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
     Route::get('teacher/student/{id}','AccountManage\StudentManageController@show');
     Route::put('/teacher/student/{id}','AccountManage\StudentManageController@update');
     Route::get('teacher/analyze/{id}','AccountManage\UserManageController@analyze');
+    Route::get('teacher/getInfo/{id}','AccountManage\UserManageController@teacherStatus');
 });
 
 Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
@@ -85,9 +86,14 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
 //    Route::post('/search','ClassManage\ClassController@search');
 
     Route::post('/admin/subject','SubjectManage\SubjectController@store');
+    Route::get('admin/subject','SubjectManage\SubjectController@index');
+    Route::get('admin/subject/{id}','SubjectManage\SubjectController@show');
+    Route::delete('admin/subject/{id}','SubjectManage\SubjectController@delete');
     Route::put('/admin/subject/{id}','SubjectManage\SubjectController@update');
     Route::post('/admin/assign/upload','AssignManage\AssignController@upload');
     Route::delete('/admin/assign/{id}','AssignManage\AssignController@delete');
+    Route::get('/admin/assign/','AssignManage\AssignController@index');
+    Route::get('/admin/assign/{id}','AssignManage\AssignController@show');
 
 
 

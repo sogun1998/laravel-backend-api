@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -53,7 +54,7 @@ class User extends Authenticatable
     }
     public function classsubject()
     {
-        return $this->hasMany('App\ClassSubject');
+        return $this->hasMany('App\ClassSubject','teacher_id','id');
     }
 
 

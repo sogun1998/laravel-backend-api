@@ -12,7 +12,7 @@ class ClassSubject extends Model
     ];
     public function teacher()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','teacher_id','id');
     }
     public function lophoc()
     {
@@ -23,5 +23,10 @@ class ClassSubject extends Model
         return $this->belongsTo('App\Subject');
 
     }
+    public function achievements()
+    {
+        return $this->hasMany('App\Achievement');
+    }
+
 
 }

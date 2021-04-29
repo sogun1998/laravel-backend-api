@@ -25,6 +25,10 @@ class Student extends Authenticatable
     {
         return $this->belongsTo('App\Lophoc');
     }
+    public function achievement()
+    {
+        return $this->hasOne('App\Achievement');
+    }
     public function scopeFullname($query, $request)
     {
         if ($request->has('fullname')) {

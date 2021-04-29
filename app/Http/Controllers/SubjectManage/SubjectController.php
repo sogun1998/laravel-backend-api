@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SubjectManage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SubjectCollection;
 use App\Http\Resources\SubjectResource;
 use App\LevelTeacher;
 use App\Subject;
@@ -18,6 +19,7 @@ class SubjectController extends Controller
     public function index()
     {
         //
+        return new SubjectCollection(Subject::paginate(10));
     }
 
     /**
@@ -44,7 +46,8 @@ class SubjectController extends Controller
             'subjectname'=>$request->subjectname,
 //            'subject'=>$request->subject,
             'grade'=>$request->grade,
-            'school'=>$request->school
+            'school'=>$request->school,
+            'type'=>$request->type
 //            'canBeKeyTeacher'=> true
         ]);
         return response()->json([
@@ -65,6 +68,14 @@ class SubjectController extends Controller
     public function show($id)
     {
         //
+        if (Subject::where('id', $id)->exists()) {
+            $subject = Subject::find($id);
+            return new SubjectResource($subject);
+        } else {
+            return response()->json([
+                "message" => "Class not found"
+            ], 404);
+        }
     }
 
     /**
@@ -118,5 +129,21 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function delete($id)
+    {
+        //
+        if(Subject::where('id', $id)->exists()) {
+            $subject = Subject::find($id);
+            $subject->delete();
+
+            return response()->json([
+                "message" => "Subject deleted"
+            ], 202);
+        } else {
+            return response()->json([
+                "message" => "Subject not found"
+            ], 404);
+        }
     }
 }
