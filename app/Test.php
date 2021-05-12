@@ -4,21 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mark extends Model
+class Test extends Model
 {
     //
     protected $fillable = [
-        'achievement_id',
-        'finalGrade'
+        'classSubject_id', 'testname', 'percentage'
     ];
-    public function achievement()
+    public function classSubject()
     {
-        return $this->belongsTo('App\Achievement');
+        return $this->belongsTo('App\ClassSubject','classSubject_id','id');
     }
+
     public function markDetail()
     {
         return $this->hasMany('App\MarkDetail');
     }
-
-
 }

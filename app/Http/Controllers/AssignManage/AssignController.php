@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\AssignManage;
 
+use App\Achievement;
 use App\ClassSubject;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AssignCollection;
 use App\Http\Resources\AssignResource;
 use App\Lophoc;
+use App\Mark;
 use App\Student;
 use App\Subject;
 use App\User;
@@ -21,7 +23,7 @@ class AssignController extends Controller
     public function index()
     {
         //
-        return new AssignCollection(ClassSubject::paginate(10));
+        return new AssignCollection(ClassSubject::where("isActive",1)->paginate(10));
     }
     public function upload(Request $request){
 //
@@ -40,7 +42,16 @@ class AssignController extends Controller
                     ->get();
                 $class = Lophoc::where("classname",$assignment['classname'])->where("school",$assignment['school'])->get();
                 $subject = Subject::where("subjectname",$assignment['subjectname'])->where("school",$assignment['school'])->where("grade",$assignment['grade'])->get();
-              $input = ClassSubject::create(
+//                if($class->count() == 0){
+//                    break;
+//                    DB::rollBack();
+////
+//                    return response()->json([
+//                        "message" => "Kiểm tra lại thông tin Lớp và Giáo viên",
+////
+//                    ]);
+//                }
+                $input = ClassSubject::create(
                 [
                     'lophoc_id' =>$class[0]->id,
                     'subject_id'=>$subject[0]->id,
@@ -54,14 +65,33 @@ class AssignController extends Controller
 //                $input->lophoc_id = $class[0]->id;
                 $input->save();
                 $input->touch();
+                $students = Student::where('lophoc_id',$class[0]->id)->get();
+                foreach ($students as $student ){
+                    $achievement = Achievement::create(
+                        [
+                            'student_id'=>$student->id,
+                            'classSubject_id'=>$input->id,
+                        ]
+                    );
+                    $mark = Mark::create([
+                        'achievement_id' => $achievement->id,
+                        'finalGrade' => 0
+                    ]);
+                }
                 $count++;
 //                DB::insert('insert into students (email, name, password,fullname,gender,phone) values (?, ?, ?, ?, ?, ?)', [$student['email'], $student['name'], $student['password'], $student['email'], $student['fullname'], $student['gender'], $student['phone']]);
             }
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-
             throw new Exception($e->getMessage());
+
+//            if ($e instanceof ErrorException) {
+//            return response()->json([
+//                "message" => "Kiểm tra lại thông tin Lớp và Giáo viên",
+////                "Total created" => $count
+//            ]);
+//        }
 //            return response()->json([
 //                "message" => $e->getMessage(),
 ////                "Total created" => $count
@@ -73,9 +103,10 @@ class AssignController extends Controller
             "Total created" => $count,
 //            "class" => $class,
 //            "birthday" => $birthday->toDateString(),
-//            "teacher" => $teacher[0]->birthday,
+//            "teacher" => $teacher,
 //
-//            "subject" => $subject
+//            "subject" => $subject,
+//            "student" => $students
         ]);
 
 
@@ -85,9 +116,10 @@ class AssignController extends Controller
     {
         //
         if(ClassSubject::where('id', $id)->exists()) {
-            $student = ClassSubject::find($id);
-            $student->delete();
-
+            $assign = ClassSubject::find($id);
+            $assign->isActive = 0 ;
+            $assign->save();
+            $assign->touch();
             return response()->json([
                 "message" => "Relative deleted"
             ], 202);
@@ -108,29 +140,26 @@ class AssignController extends Controller
             ], 404);
         }
     }
-//    public function update(Request $request, $id){
-//        if (ClassSubject::where('id', $id)->exists()) {
-//            $classSubject = ClassSubject::find($id);
-////            $subject->subjectname = is_null($request->subjectname) ? $subject->subjectname : $request->subjectname;
-////            $subject->grade = is_null($request->grade) ? $subject->grade : $request->grade;
-////            $subject->type = is_null($request->type) ? $subject->type : $request->type;
-////            $subject->school = is_null($request->school) ? $class->school : $request->school;
-//            if(!is_null($request->subjectname)){
-//                $subject = Subject::where("subjectname",$request->subjectname)->where("school",$assignment['school'])->get();
-//            }
-//            $classSubject->save();
-//            $classSubject->touch();
-//            return response()->json([
-//                "message" => "Class updated successfully",
-////                "subject"=> new SubjectResource($subject)
-////                "user"=>$user)
-//            ], 200);
-//        } else {
-//            return response()->json([
-//                "message" => "Subject not found"
-//            ], 404);
-//
-//        }
-//    }
+    public function update(Request $request, $id){
+        if (ClassSubject::where('id', $id)->exists()) {
+            $classSubject = ClassSubject::find($id);
+//            $subject->subjectname = is_null($request->subjectname) ? $subject->subjectname : $request->subjectname;
+//            $subject->grade = is_null($request->grade) ? $subject->grade : $request->grade;
+//            $subject->type = is_null($request->type) ? $subject->type : $request->type;
+            $classSubject->teacher_id = is_null($request->teacher_id) ? $classSubject->teacher_id : $request->teacher_id;
+            $classSubject->save();
+            $classSubject->touch();
+            return response()->json([
+                "message" => "Assign updated successfully",
+//                "subject"=> new SubjectResource($subject)
+//                "user"=>$user)
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "Assign not found"
+            ], 404);
+
+        }
+    }
 
 }

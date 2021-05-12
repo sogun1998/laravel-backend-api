@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\LevelManage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LevelResource;
+use App\Http\Resources\LevelTeacherCollection;
 use App\Http\Resources\TeacherWithLevelCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
@@ -134,29 +135,40 @@ class LevelTeacherController extends Controller
     }
     public function findLevel(Request $request)
     {
-        $level = LevelTeacher::query();
-
+//        $level = LevelTeacher::query();
+//        $level= DB::table('level_teachers')
+//            ->where('subject', 'like', '%' . $request->subject . '%')
+//            ->get();
         if ($request->has('level')) {
-            $level->where('level', 'LIKE', '%' . $request->level . '%');
+            $level= DB::table('level_teachers')
+            ->where('level', 'like', '%' . $request->level . '%')
+            ->get();
         }
         if ($request->has('subject')) {
-            $level->where('subject', 'LIKE', '%' . $request->subject . '%');
+            $level= DB::table('level_teachers')
+            ->where('subject', 'like', '%' . $request->subject . '%')
+            ->get();
         }
 //        if ($request->has('grade')) {
 //            $level->where('grade', 'LIKE', '%' . $request->grade . '%');
 //        }
-        if(!$level->get())
+        if($level->count()>0)
 //            return new LevelResource($level->get());
+
             return response()->json([
 
-                'User' => $level->get(),
+//                'User' => LevelTeacher::find($level[0]->id)->teachers,
+            'Teacher' => new LevelTeacherCollection($level)
             ],200);
         else
         return response()->json([
             'status_code' => 404,
             'message' => "Level not found",
         ]);
-
+//        return response()->json([
+////
+//                'User' =>  LevelTeacher::find($level[0]->id)->teachers,
+//            ],200);
     }
     public function teccherCanbeKey(){
         $users = DB::table('users')

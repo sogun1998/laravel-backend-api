@@ -15,12 +15,11 @@ class CreateMarkDetailsTable extends Migration
     {
         Schema::create('mark_details', function (Blueprint $table) {
             $table->id();
-            $table->string('testname')->nullable();
             $table->float('mark')->nullable();
-            $table->integer('percentage');
             $table->string('status');
             $table->string('comment');
-
+            $table->unsignedBigInteger('test_id')->nullable();
+            $table->foreign('test_id')->references('id')->on('tests');
             $table->unsignedBigInteger('mark_id')->nullable();
             $table->foreign('mark_id')->references('id')->on('marks');
             $table->timestamps();

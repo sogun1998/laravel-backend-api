@@ -51,12 +51,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-//        if ($exception instanceof QueryException) {
-//            return response()->json([
-//                "message" => "Querry Error",
-////                "Total created" => $count
-//            ],500);
-//        }
+        if ($exception instanceof ErrorException) {
+            return response()->json([
+                "message" => "Lớp hoặc giáo viên không có trong hệ thô",
+//                "Total created" => $count
+            ]);
+        }
 //
         return parent::render($request, $exception);
     }

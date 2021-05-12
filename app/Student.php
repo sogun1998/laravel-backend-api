@@ -27,7 +27,7 @@ class Student extends Authenticatable
     }
     public function achievement()
     {
-        return $this->hasOne('App\Achievement');
+        return $this->hasMany('App\Achievement');
     }
     public function scopeFullname($query, $request)
     {

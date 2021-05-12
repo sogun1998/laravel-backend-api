@@ -144,6 +144,7 @@ class StudentManageController extends Controller
             $input->lophoc_id = $class[0]->id;
             $input->save();
             $input->touch();
+
             $count++;
 //                DB::insert('insert into students (email, name, password,fullname,gender,phone) values (?, ?, ?, ?, ?, ?)', [$student['email'], $student['name'], $student['password'], $student['email'], $student['fullname'], $student['gender'], $student['phone']]);
         }
@@ -186,6 +187,9 @@ class StudentManageController extends Controller
             "student"=> $student,
             "count" => $student->count()
         ], 200);
+    }
+    public function studentWithSubjectScore(){
+
     }
 
 }

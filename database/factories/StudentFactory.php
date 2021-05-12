@@ -26,7 +26,7 @@ $factory->define(Student::class, function (Faker $faker) {
         'gender'=> Str::ucfirst(vnfaker()->gender()),
 //        'birthday' => vnfaker()->date($symbol = '-')
         'birthday' => $now->subYear($random),
-        'lophoc_id' => 2
+        'lophoc_id' => 3
         // 'remember_token' => Str::random(10),
     ];
 });

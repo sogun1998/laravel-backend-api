@@ -21,6 +21,7 @@ class CreateClassSubjectsTable extends Migration
             $table->foreign('lophoc_id')->references('id')->on('lophocs');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->integer('isActive')->default(1);
             $table->timestamps();
         });
     }

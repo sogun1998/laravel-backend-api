@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
     public function class()
     {
-        return $this->hasOne('App\Lophoc');
+        return $this->hasOne('App\Lophoc','teacher_id','id');
     }
     public function OauthAcessToken()
     {

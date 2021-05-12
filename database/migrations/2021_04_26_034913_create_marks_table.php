@@ -15,10 +15,9 @@ class CreateMarksTable extends Migration
     {
         Schema::create('marks', function (Blueprint $table) {
             $table->id();
-            $table->string('semester')->nullable();
             $table->float('finalGrade')->nullable();
-            $table->unsignedBigInteger('achivement_id')->nullable();
-            $table->foreign('achivement_id')->references('id')->on('achievements');
+            $table->unsignedBigInteger('achievement_id')->nullable();
+            $table->foreign('achievement_id')->references('id')->on('achievements');
             $table->timestamps();
         });
     }

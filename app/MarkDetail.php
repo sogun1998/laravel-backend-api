@@ -8,11 +8,19 @@ class MarkDetail extends Model
 {
     //
     protected $fillable = [
-        'mark_id', 'comment', 'status', 'test_name'
+        'mark_id', 'comment', 'status', 'test_id','updated_at','mark'
     ];
 
-    public function markDetail()
+    public function markid()
     {
-        return $this->belongsTo('App\Mark');
+        return $this->belongsTo('App\Mark','mark_id','id');
+    }
+    public function test()
+    {
+        return $this->belongsTo('App\Test');
+    }
+    public function hictory()
+    {
+        return $this->hasMany('App\Hictory','markDetail_id','id');
     }
 }

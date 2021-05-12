@@ -60,7 +60,7 @@ class UserController extends Controller
         $access_token = $user->createToken('user',['user'])->accessToken;
         //LOGIN
         $keyClass = Lophoc::where('teacher_id',$user->id)->get('id');
-        $teachClass = ClassSubject::select('lophoc_id','subject_id')->where('teacher_id',$user->id)->get();
+        $teachClass = ClassSubject::select('lophoc_id','subject_id','id')->where('teacher_id',$user->id)->where('isActive',1)->get();
         //RETURN DATA WITH access_TOKEN
         return response()->json([
             'status_code'=>200 ,

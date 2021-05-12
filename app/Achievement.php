@@ -14,9 +14,12 @@ class Achievement extends Model
     {
         return $this->belongsTo('App\Student');
     }
-    public function classSubject()
+    public function classsubject()
     {
-        return $this->belongsTo('App\ClassSubject');
+        return $this->belongsTo('App\ClassSubject','classSubject_id','id');
     }
-
+    public function mark()
+    {
+        return $this->hasOne('App\Mark');
+    }
 }

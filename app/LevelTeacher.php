@@ -16,6 +16,6 @@ class LevelTeacher extends Model
     }
     public function teachers()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User','level_id','id');
     }
 }

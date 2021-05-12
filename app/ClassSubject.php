@@ -25,7 +25,11 @@ class ClassSubject extends Model
     }
     public function achievements()
     {
-        return $this->hasMany('App\Achievement');
+        return $this->hasMany('App\Achievement','classSubject_id','id');
+    }
+    public function test()
+    {
+        return $this->hasMany('App\Test','classSubject_id','id');
     }
 
 

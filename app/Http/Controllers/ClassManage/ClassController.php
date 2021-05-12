@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ClassCollection;
 use App\Http\Resources\ClassResource;
 use App\Http\Resources\StudentCollection;
+use App\Http\Resources\StudentScoreCollection;
 use App\Http\Resources\UserResource;
 use App\LevelTeacher;
 use App\Lophoc;
@@ -137,7 +138,27 @@ class ClassController extends Controller
 //            $class = Lophoc::find($¥id);
 //            return new StudentCollection($class->students->paginate(10));
             $students = Student::where('lophoc_id', '=', $id)->paginate(15);
+//            foreach ($students as $student){
+//                $student -> classObj = $subjectClass;
+//            }
             return new StudentCollection($students);
+        } else {
+            return response()->json([
+                "message" => "Class not found"
+            ], 404);
+        }
+
+    }
+    public function listStudentInTeachClass($id,$subjectClass)
+    {
+        if (Lophoc::where('id', $id)->exists()) {
+//            $class = Lophoc::find($¥id);
+//            return new StudentCollection($class->students->paginate(10));
+            $students = Student::where('lophoc_id', '=', $id)->paginate(15);
+            foreach ($students as $student){
+                $student -> classObj = $subjectClass;
+            }
+            return new StudentScoreCollection($students);
         } else {
             return response()->json([
                 "message" => "Class not found"

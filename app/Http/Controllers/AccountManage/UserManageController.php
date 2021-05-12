@@ -243,11 +243,17 @@ class UserManageController extends Controller
                 $count_form_student = Student::where('lophoc_id', '=', $class->id)->count();
                 $count_form_students += $count_form_student;
             }
+            $count_student_teach = 0;
+            $classSubjects = ClassSubject::where('teacher_id',$id)->where('isActive',1)->get();
+            foreach ($classSubjects as $classSubject){
+                $count_student = Student::where('lophoc_id', '=', $classSubject->lophoc_id)->count();
+                $count_student_teach += $count_student;
+            }
             return response()->json([
                 "count_form_class" => $count_form_class->count(),
                 "count_form_student" => $count_form_students,
-                "count_class_teach" => 0,
-                "count_student_teach" =>0
+                "count_class_teach" => $classSubjects->count(),
+                "count_student_teach" =>$count_student_teach
             ],200);
         } else {
             return response()->json([
@@ -260,7 +266,7 @@ class UserManageController extends Controller
             $user = User::find($id);
             $classes = Lophoc::where('teacher_id',$id)->get();
 //            $class = Lophoc::find()
-            $assign = ClassSubject::where('teacher_id',$id)->get();
+            $assign = ClassSubject::where('teacher_id',$id)->where('isActive',1)->get();
             return response()->json([
                 "classByKeyTeacher" => $classes,
                 "classTeach" => new AssignCollection($assign),

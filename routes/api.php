@@ -35,11 +35,26 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
     Route::post('teacher/class/add','ClassManage\ClassController@addStudent');
     Route::post('teacher/class/remove','ClassManage\ClassController@removeStudent');
     Route::get('teacher/class/list_student/{id}','ClassManage\ClassController@listStudent');
+    Route::get('teacher/class/list_student/{id}/class_subject/{subjectClass}','ClassManage\ClassController@listStudentInTeachClass');
     Route::get('teacher/form_class/{id}','ClassManage\ClassController@getListClassControl');
     Route::get('teacher/student/{id}','AccountManage\StudentManageController@show');
     Route::put('/teacher/student/{id}','AccountManage\StudentManageController@update');
     Route::get('teacher/analyze/{id}','AccountManage\UserManageController@analyze');
     Route::get('teacher/getInfo/{id}','AccountManage\UserManageController@teacherStatus');
+    Route::post('teacher/test/','TestManage\TestController@store');
+    Route::get('teacher/test/{classSubject_id}','TestManage\TestController@index');
+    Route::get('teacher/test/show/{id}','TestManage\TestController@show');
+    Route::put('teacher/test/{id}','TestManage\TestController@update');
+    Route::delete('teacher/test/{id}','TestManage\TestController@delete');
+    Route::get('teacher/mark_detail/{test_id}','MarkDetailManage\MarkDetailController@indexFromTest');
+    Route::put('/teacher/score/{id}','MarkDetailManage\MarkDetailController@update');
+    Route::get('/teacher/score/{id}','MarkDetailManage\MarkDetailController@show');
+    Route::post('teacher/hictory/send','MarkDetailManage\MarkHictoryController@store');
+    Route::post('teacher/hictory/change','MarkDetailManage\MarkHictoryController@change');
+
+    Route::get('teacher/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@index');
+    Route::get('teacher/chart/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@initChart');
+    Route::get('teacher/achievement/student/{student}','AchievementManage\AchievementController@subject_study');
 });
 
 Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
@@ -94,8 +109,12 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::delete('/admin/assign/{id}','AssignManage\AssignController@delete');
     Route::get('/admin/assign/','AssignManage\AssignController@index');
     Route::get('/admin/assign/{id}','AssignManage\AssignController@show');
+    Route::put('/admin/assign/{id}','AssignManage\AssignController@update');
 
-
+    Route::post('/admin/hictory/accept','MarkDetailManage\MarkHictoryController@accept');
+    Route::post('/admin/hictory/refuse','MarkDetailManage\MarkHictoryController@refuse');
+    Route::get('/admin/hictory/','MarkDetailManage\MarkHictoryController@index');
+    Route::get('/admin/hictory/detail/','MarkDetailManage\MarkHictoryController@detail');
 
 });
 
@@ -103,6 +122,9 @@ Route::middleware(['auth:student','studentTokenValidate'])->group(function (){
     Route::get('/student/logout','Authenticate\StudentLoginController@logout');
     Route::put('/student/{id}','AccountManage\StudentManageController@update');
 //    Route::get('/','Authenticate\AdminController@getAdmin');
+    Route::get('student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@index');
+    Route::get('student/chart/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@initChart');
+    Route::get('student/achievement/{student}','AchievementManage\AchievementController@subject_study');
 });
 
 Route::post('/user/register','Authenticate\UserController@register');
@@ -117,3 +139,4 @@ Route::post('/admin/login','Authenticate\AdminController@login');
 Route::post('/student/register','Authenticate\StudentLoginController@register');
 
 Route::post('/student/login','Authenticate\StudentLoginController@login');
+
