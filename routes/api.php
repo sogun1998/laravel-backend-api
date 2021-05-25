@@ -55,6 +55,13 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
     Route::get('teacher/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@index');
     Route::get('teacher/chart/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@initChart');
     Route::get('teacher/achievement/student/{student}','AchievementManage\AchievementController@subject_study');
+
+
+    Route::post('teacher/conduct','ConductManage\ConductController@store');
+    Route::get('teacher/conduct/student/{student}/class_sub/{classSubject_id}','ConductManage\ConductController@index');
+    Route::get('teacher/conduct/student/{student}','ConductManage\ConductController@getAll');
+    Route::get('teacher/conduct/avg/student/{student}','ConductManage\ConductController@average');
+    Route::post('teacher/conduct/summary','ConductManage\ConductSummaryController@store');
 });
 
 Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
@@ -125,6 +132,10 @@ Route::middleware(['auth:student','studentTokenValidate'])->group(function (){
     Route::get('student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@index');
     Route::get('student/chart/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@initChart');
     Route::get('student/achievement/{student}','AchievementManage\AchievementController@subject_study');
+
+    Route::get('student/conduct/{student}','ConductManage\ConductController@getAll');
+    Route::get('student/conduct/avg/student/{student}','ConductManage\ConductController@average');
+    Route::get('student/{id}','AccountManage\StudentManageController@show');
 });
 
 Route::post('/user/register','Authenticate\UserController@register');

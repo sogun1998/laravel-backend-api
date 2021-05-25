@@ -23,18 +23,21 @@ class Student extends Authenticatable
     }
     public function class()
     {
-        return $this->belongsTo('App\Lophoc');
+        return $this->belongsTo('App\Lophoc','lophoc_id','id');
     }
     public function achievement()
     {
         return $this->hasMany('App\Achievement');
+    }
+    public function conductSummary()
+    {
+        return $this->hasMany('App\ConductSummary','student_id','id');
     }
     public function scopeFullname($query, $request)
     {
         if ($request->has('fullname')) {
             $query->where('fullname', 'LIKE', '%' . $request->fullname . '%');
         }
-
         return $query;
     }
     public function scopeName($query, $request)

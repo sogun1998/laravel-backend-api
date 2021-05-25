@@ -25,7 +25,9 @@ class StudentResource extends JsonResource
             'gender' =>  $this->gender,
             'school' => $this->school,
             'update_at' => (string) $this->updated_at,
-            'class_id'=> $this->lophoc_id
+            'class_id'=> $this->lophoc_id,
+            'conductSummary' => new ConductSummaryCollection($this->conductSummary),
+            'class' => new ClassResource($this->class)
 //            'level' => $this->level
         ];
     }

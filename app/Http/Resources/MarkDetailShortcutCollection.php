@@ -25,7 +25,7 @@ class MarkDetailShortcutCollection extends ResourceCollection
                     'mark' => $score->mark,
                     'mark_id' => new MarkResource(Mark::find($score->mark_id)),
 //                    'status' => $score->status,
-//                    'comment' => $score->comment,
+                    'comment' => $score->comment,
 //                    'student' => $score->markid->achievement->student,
                     'subject'=> $score->test->classSubject->subject,
 //                    'subject' => new SubjectResource($test->classSubject->subject),

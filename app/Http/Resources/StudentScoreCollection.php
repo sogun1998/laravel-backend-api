@@ -26,6 +26,7 @@ class StudentScoreCollection extends ResourceCollection
                     'email' =>  $student->email,
                     'gender' =>  $student->gender,
                     'school'=>$student->school,
+                    'conduct' => 0,
 //                    'ids' => $student->classObj,
 //                    'achievement' => new AchievementCollection($student->achievement)
                     'achievement' => new AchievementCollection(Achievement::where('classSubject_id',$student->classObj)->where('student_id',$student->id)->get())

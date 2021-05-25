@@ -22,4 +22,8 @@ class Achievement extends Model
     {
         return $this->hasOne('App\Mark');
     }
+    public function conduct()
+    {
+        return $this->hasMany('App\Conduct');
+    }
 }

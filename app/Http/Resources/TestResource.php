@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TestResource extends JsonResource
@@ -19,6 +20,7 @@ class TestResource extends JsonResource
             'testname' => $this->testname,
             'average' => $this->average,
             'percentage' => $this->percentage,
+            'date' => Carbon::createFromFormat('Y-m-d H:i:s',$this->updated_at)->toDateString()
         ];
     }
 }

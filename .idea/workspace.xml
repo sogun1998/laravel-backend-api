@@ -2,32 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="906d0343-9436-4ed4-9e90-91cd72bec181" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/a-very-simple-multi-auth-using-laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/a-very-simple-multi-auth-using-laravel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Achievement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Achievement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ClassSubject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClassSubject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/StudentManageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/StudentManageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/UserManageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AccountManage/UserManageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AssignManage/AssignController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AssignManage/AssignController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Authenticate/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Authenticate/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClassManage/ClassController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClassManage/ClassController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LevelManage/LevelTeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LevelManage/LevelTeacherController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MarkManage/MarkController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/AchievementCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/AchievementCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/MarkDetailShortcutCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/MarkDetailShortcutCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/StudentResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/StudentResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/LevelTeacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/LevelTeacher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mark.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mark.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MarkDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MarkDetail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/StudentScoreCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/StudentScoreCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/TestResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/TestResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/StudentFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/StudentFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_24_023932_create_class_subjects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_24_023932_create_class_subjects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_25_101520_create_achievements_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_25_101520_create_achievements_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_26_034913_create_marks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_26_034913_create_marks_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_26_091741_create_mark_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_26_091741_create_mark_details_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -220,7 +202,8 @@
       <workItem from="1615134373419" duration="16050000" />
       <workItem from="1615951550304" duration="11801000" />
       <workItem from="1617333789764" duration="76279000" />
-      <workItem from="1619344037258" duration="124865000" />
+      <workItem from="1619344037258" duration="155165000" />
+      <workItem from="1621238218407" duration="3038000" />
     </task>
     <servers />
   </component>
@@ -238,5 +221,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/routes/api.php</url>
+          <line>46</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
