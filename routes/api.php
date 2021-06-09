@@ -29,12 +29,14 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
     Route::get('/user/logout','Authenticate\UserController@logout');
     Route::get('/user','Authenticate\UserController@getUser');
     Route::put('/user/{id}','AccountManage\UserManageController@update');
+    Route::get('/teacher/get/{id}','AccountManage\UserManageController@show');
 
     Route::get('teacher/class/{id}','ClassManage\ClassController@show');
     Route::get('teacher/search','AccountManage\StudentManageController@search');
     Route::post('teacher/class/add','ClassManage\ClassController@addStudent');
     Route::post('teacher/class/remove','ClassManage\ClassController@removeStudent');
     Route::get('teacher/class/list_student/{id}','ClassManage\ClassController@listStudent');
+    Route::get('teacher/class/list_parent/{id}','ClassManage\ClassController@listParent');
     Route::get('teacher/class/list_student/{id}/class_subject/{subjectClass}','ClassManage\ClassController@listStudentInTeachClass');
     Route::get('teacher/form_class/{id}','ClassManage\ClassController@getListClassControl');
     Route::get('teacher/student/{id}','AccountManage\StudentManageController@show');
@@ -62,6 +64,11 @@ Route::middleware(['auth:user','userTokenValidate'])->group(function () {
     Route::get('teacher/conduct/student/{student}','ConductManage\ConductController@getAll');
     Route::get('teacher/conduct/avg/student/{student}','ConductManage\ConductController@average');
     Route::post('teacher/conduct/summary','ConductManage\ConductSummaryController@store');
+
+    Route::get('teacher/parent/{id}','AccountManage\PhuhuynhManageController@show');
+    Route::put('teacher/parent/{id}','AccountManage\PhuhuynhManageController@update');
+    Route::post('teacher/parent/','AccountManage\PhuhuynhManageController@store');
+    Route::get('teacher/student/parent/{id}','AccountManage\PhuhuynhManageController@showFromStudent');
 });
 
 Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
@@ -88,6 +95,9 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::put('/updateLevelTecher/{id}','AccountManage\UserManageController@updateLevelTeacher');
     Route::post('/teacher/delete', 'AccountManage\UserManageController@multiDelete');
     Route::put('/admin/teacher/upload','AccountManage\UserManageController@upload');
+    Route::get('/admin/teacher/count','AccountManage\UserManageController@countByMonth');
+    Route::get('/admin/student/count','AccountManage\StudentManageController@countByMonth');
+    Route::get('/admin/parent/count','AccountManage\PhuhuynhManageController@countByMonth');
 
 //    Route::get('/teacher','UserManageController@index');
     Route::get('/student','AccountManage\StudentManageController@getTotalStudent');
@@ -95,7 +105,7 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
     Route::post('/student','AccountManage\StudentManageController@store');
     Route::put('/admin/student/{id}','AccountManage\StudentManageController@update');
     Route::delete('/student/{id}','AccountManage\StudentManageController@delete');
-    Route::get('/student/{id}','AccountManage\StudentManageController@show');
+    Route::get('/admin/student/{id}','AccountManage\StudentManageController@show');
     Route::post('/student/delete', 'AccountManage\StudentManageController@multiDelete');
     Route::post('/admin/student/upload','AccountManage\StudentManageController@upload');
 
@@ -109,6 +119,7 @@ Route::middleware(['auth:admin','adminTokenValidate'])->group(function () {
 
     Route::post('/admin/subject','SubjectManage\SubjectController@store');
     Route::get('admin/subject','SubjectManage\SubjectController@index');
+    Route::get('admin/subject/all','SubjectManage\SubjectController@all');
     Route::get('admin/subject/{id}','SubjectManage\SubjectController@show');
     Route::delete('admin/subject/{id}','SubjectManage\SubjectController@delete');
     Route::put('/admin/subject/{id}','SubjectManage\SubjectController@update');
@@ -137,6 +148,18 @@ Route::middleware(['auth:student','studentTokenValidate'])->group(function (){
     Route::get('student/conduct/avg/student/{student}','ConductManage\ConductController@average');
     Route::get('student/{id}','AccountManage\StudentManageController@show');
 });
+Route::middleware(['auth:phuhuynh','phuhuynhTokenValidate'])->group(function (){
+    Route::get('/parent/logout','Authenticate\PhuhuynhController@logout');
+    Route::put('/parent/{id}','AccountManage\PhuhuynhManageController@update');
+    Route::get('/parent/{id}','AccountManage\PhuhuynhManageController@show');
+    Route::get('/parent/achievement/{student}','AchievementManage\AchievementController@subject_study');
+    Route::get('/parent/chart/student/{student}/class_sub/{classSubject_id}','AchievementManage\AchievementController@initChart');
+    Route::get('phuhuynh/messages', 'ChatManage\ChatController@index');
+    Route::post('/parent/messages', 'ChatManage\ChatController@store');
+    Route::post('/parent/room', 'ChatManage\ChatController@makeRoom');
+    Route::get('/parent/room/{id}','ChatManage\ChatController@showRoom');
+    Route::get('/parent/getKeyTeacher/{id}','ChatManage\ChatController@getKeyTeacher');
+});
 
 Route::post('/user/register','Authenticate\UserController@register');
 
@@ -150,4 +173,8 @@ Route::post('/admin/login','Authenticate\AdminController@login');
 Route::post('/student/register','Authenticate\StudentLoginController@register');
 
 Route::post('/student/login','Authenticate\StudentLoginController@login');
+
+Route::post('/parent/register','Authenticate\PhuhuynhController@register');
+
+Route::post('/parent/login','Authenticate\PhuhuynhController@login');
 

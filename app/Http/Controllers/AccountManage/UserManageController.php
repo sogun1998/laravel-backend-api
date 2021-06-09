@@ -253,6 +253,7 @@ class UserManageController extends Controller
                 "count_form_class" => $count_form_class->count(),
                 "count_form_student" => $count_form_students,
                 "count_class_teach" => $classSubjects->count(),
+                "demo" => new AssignCollection($classSubjects),
                 "count_student_teach" =>$count_student_teach
             ],200);
         } else {
@@ -276,6 +277,37 @@ class UserManageController extends Controller
                 "message" => "User not found"
             ], 404);
         }
+    }
+    public function countByMonth()
+    {
+        $users = User::select('id', 'created_at')
+            ->get()
+            ->groupBy(function($date) {
+                //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+                return Carbon::parse($date->created_at)->format('m'); // grouping by months
+            });
+
+        $usermcount = [];
+        $userArr = [];
+        $month = [
+            'No','Jan','Feb','Mar','Apr','May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        foreach ($users as $key => $value) {
+            $usermcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($usermcount[$i])){
+                $userArr[$i] = $usermcount[$i];
+            }else{
+                $userArr[$i] = 0;
+            }
+        }
+        return response()->json([
+//            "data" => $usermcount,
+            "data_hi" => $userArr
+        ], 200);
+
     }
 
 

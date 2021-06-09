@@ -29,6 +29,10 @@ class Student extends Authenticatable
     {
         return $this->hasMany('App\Achievement');
     }
+    public function parent()
+    {
+        return $this->hasOne('App\Phuhuynh');
+    }
     public function conductSummary()
     {
         return $this->hasMany('App\ConductSummary','student_id','id');

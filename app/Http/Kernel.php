@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'userTokenValidate' => \App\Http\Middleware\UserTokenValidate::class,
         'adminTokenValidate' => \App\Http\Middleware\AdminTokenValidate::class,
         'studentTokenValidate' => \App\Http\Middleware\StudentTokenValidate::class,
+        'phuhuynhTokenValidate' => \App\Http\Middleware\PhuhuynhTokenValidate::class,
     ];
 }

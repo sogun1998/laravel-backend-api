@@ -4,10 +4,11 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class StudentCollection extends ResourceCollection
+class ParentCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
@@ -19,17 +20,15 @@ class StudentCollection extends ResourceCollection
                     'id' => $student->id,
                     'name' => $student->name,
                     'fullname' => $student->fullname,
-                    'phone' => $student->phone,
-                    'email' =>  $student->email,
-                    'gender' =>  $student->gender,
-                    'school'=>$student->school
+
+                    'parent' => $student->parent,
+                    'class' =>  new ClassResource($student->class),
+//                    'gender' =>  $student->gender,
+//                    'school'=>$student->school
 //            'created_at' => (string) $this->created_at,
 //                    'level' => $student->level
                 ];
             }),
-            'links' => [
-                'self' => 'link-value',
-            ],
         ];
     }
 }

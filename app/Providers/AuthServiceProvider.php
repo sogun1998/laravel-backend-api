@@ -30,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
             'user' => 'The place only users can access.',
             'admin' => 'The place only admins can access',
             'student'=> 'The place only students can access',
+            'phuhuynh'=> 'The place only phuhuynh can access',
         ]);
 
         Passport::routes();

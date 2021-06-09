@@ -16,6 +16,9 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function all(){
+        return Subject::all()->count();
+    }
     public function index()
     {
         //

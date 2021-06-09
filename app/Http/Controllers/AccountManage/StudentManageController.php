@@ -138,9 +138,9 @@ class StudentManageController extends Controller
             $input->fullname = $student['fullname'];
             $input->gender =$student['gender'];
             $input->phone =$student['phone'];
-//            $input->phone =$student['phone'];
-//            $input->school =$student['school'];
-            $class = Lophoc::where("classname",$student['classname'])->where("school",$student['school'])->get();
+            $class = Lophoc::where("classname",$student['classname'])
+//                ->where("school",$student['school'])
+                ->get();
             $input->lophoc_id = $class[0]->id;
             $input->save();
             $input->touch();
@@ -153,10 +153,6 @@ class StudentManageController extends Controller
             DB::rollBack();
 
             throw new Exception($e->getMessage());
-//            return response()->json([
-//                "message" => $e->getMessage(),
-////                "Total created" => $count
-//            ]);
 
         }
         return response()->json([
@@ -189,6 +185,38 @@ class StudentManageController extends Controller
         ], 200);
     }
     public function studentWithSubjectScore(){
+
+    }
+    public function countByMonth()
+    {
+        $users = Student::select('id', 'created_at')
+            ->get()
+            ->groupBy(function($date) {
+                //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+                return Carbon::parse($date->created_at)->format('m'); // grouping by months
+            });
+
+        $usermcount = [];
+        $userArr = [];
+        $month = [
+            'No','Jan','Feb','Mar','Apr','May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        foreach ($users as $key => $value) {
+            $usermcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($usermcount[$i])){
+
+                $userArr[$i] = $usermcount[$i];
+            }else{
+                $userArr[$i] = 0;
+            }
+        }
+        return response()->json([
+//            "data" => $usermcount,
+            "data_hi" => $userArr
+        ], 200);
 
     }
 

@@ -54,6 +54,10 @@ return [
             'driver' => 'passport',
             'provider' => 'students',
         ],
+        'phuhuynh' => [
+            'driver' => 'passport',
+            'provider' => 'phuhuynhs',
+        ],
     ],
 
     /*
@@ -86,6 +90,10 @@ return [
         'students' => [
             'driver' => 'eloquent',
             'model' => App\Student::class,
+        ],
+        'phuhuynhs' => [
+            'driver' => 'eloquent',
+            'model' => App\Phuhuynh::class,
         ],
 
         // 'users' => [

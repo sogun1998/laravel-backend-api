@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ClassManage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ClassCollection;
 use App\Http\Resources\ClassResource;
+use App\Http\Resources\ParentCollection;
 use App\Http\Resources\StudentCollection;
 use App\Http\Resources\StudentScoreCollection;
 use App\Http\Resources\UserResource;
@@ -142,6 +143,27 @@ class ClassController extends Controller
 //                $student -> classObj = $subjectClass;
 //            }
             return new StudentCollection($students);
+        } else {
+            return response()->json([
+                "message" => "Class not found"
+            ], 404);
+        }
+
+    }
+    public function listParent($id)
+    {
+        if (Lophoc::where('id', $id)->exists()) {
+//            $class = Lophoc::find($¥id);
+//            return new StudentCollection($class->students->paginate(10));
+            $students = Student::where('lophoc_id', '=', $id)->get();
+            $students = $students->filter(function($item) {
+                return $item->parent != null;
+            });
+//            foreach ($students as $student){
+//                $student -> classObj = $subjectClass;
+//            }
+            return new ParentCollection($students);
+//            return $students;
         } else {
             return response()->json([
                 "message" => "Class not found"
