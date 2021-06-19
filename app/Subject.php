@@ -8,7 +8,7 @@ class Subject extends Model
 {
     //
     protected $fillable = [
-        'subjectname', 'grade', 'school'
+        'subjectname', 'grade', 'school', 'type'
     ];
     public function classsubject()
     {

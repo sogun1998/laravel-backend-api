@@ -198,10 +198,6 @@ class UserManageController extends Controller
                     'email' => $teacher['email'],
                     'name' => $teacher['name'],
                     'password' => bcrypt($teacher['password'])
-//                    'fullname' => $teacher['fullname'],
-//                    'gender' => $teacher['gender'],
-//                    'phone' => $teacher['phone'],
-//                    'school' => $teacher['school']
                 ]
             );
             $birthday = Carbon::createFromDate($teacher['birthdayYear'], $teacher['birthdayMonth'], $teacher['birthdayDate'], 'Asia/Ho_Chi_Minh');

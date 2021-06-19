@@ -40,7 +40,7 @@ class AssignController extends Controller
                 $teacher = User::where("fullname",$assignment['fullname'])
                     ->where("birthday",$birthday->toDateString())
                     ->get();
-                $class = Lophoc::where("classname",$assignment['classname'])->where("school",$assignment['school'])->get();
+                $class = Lophoc::where("classname",$assignment['classname'])->get();
                 $subject = Subject::where("subjectname",$assignment['subjectname'])->where("school",$assignment['school'])->where("grade",$assignment['grade'])->get();
 //                if($class->count() == 0){
 //                    break;
@@ -56,10 +56,6 @@ class AssignController extends Controller
                     'lophoc_id' =>$class[0]->id,
                     'subject_id'=>$subject[0]->id,
                     'teacher_id'=>$teacher[0]->id
-//                    'fullname' => $teacher['fullname'],
-//                    'gender' => $teacher['gender'],
-//                    'phone' => $teacher['phone'],
-//                    'school' => $teacher['school']
                 ]
             );
 //                $input->lophoc_id = $class[0]->id;
@@ -101,11 +97,11 @@ class AssignController extends Controller
         return response()->json([
             "message" => "Created success",
             "Total created" => $count,
-//            "class" => $class,
+//            "class" => $class[0]->id,
 //            "birthday" => $birthday->toDateString(),
-//            "teacher" => $teacher,
+//            "teacher" => $teacher[0]->id,
 //
-//            "subject" => $subject,
+//            "subject" => $subject[0]->id,
 //            "student" => $students
         ]);
 

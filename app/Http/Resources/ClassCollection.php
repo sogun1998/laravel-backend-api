@@ -22,7 +22,8 @@ class ClassCollection extends ResourceCollection
                     'grade' => $class->grade,
                     'teacher_name' => $class->teacher->fullname,
                     'school' =>  $class->school,
-                    'num_student'=> count($class->students)
+                    'num_student'=> count($class->students),
+                    'teacher_id' => $class->teacher->id,
 //                    'gender' =>  $student->gender,
 //                    'school'=>$student->school
 //            'created_at' => (string) $this->created_at,

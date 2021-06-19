@@ -17,6 +17,7 @@ class PhuhuynhManageController extends Controller
 //    public function getAllStudent()
 //    {
 //        //
+
 ////        return StudentResource::collection(Student::all());
 //        return new StudentCollection(Student::paginate(10));
 ////        return User::all();
