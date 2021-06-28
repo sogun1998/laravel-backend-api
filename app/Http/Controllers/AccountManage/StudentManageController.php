@@ -125,25 +125,33 @@ class StudentManageController extends Controller
         DB::beginTransaction();
         try {
             foreach ($students as $student) {
-                $input = Student::create(
-                [
-                    'email' => $student['email'],
-                    'name' => $student['name'],
-                    'password' => bcrypt($student['password'])
-//
-                ]
-            );
-                $birthday = Carbon::createFromDate($student['birthdayYear'], $student['birthdayMonth'], $student['birthdayDate'], 'Asia/Ho_Chi_Minh');
-                $input->birthday = $birthday;
-            $input->fullname = $student['fullname'];
-            $input->gender =$student['gender'];
-            $input->phone =$student['phone'];
-            $class = Lophoc::where("classname",$student['classname'])
+                $class = Lophoc::where("classname",$student['classname'])
 //                ->where("school",$student['school'])
-                ->get();
-            $input->lophoc_id = $class[0]->id;
-            $input->save();
-            $input->touch();
+                    ->get();
+                if(count($class)==0){
+                    $count = -100;
+                    DB::rollBack();
+                }
+                else{
+                    $input = Student::create(
+                        [
+                            'email' => $student['email'],
+                            'name' => $student['name'],
+                            'password' => bcrypt($student['password'])
+//
+                        ]
+                    );
+                    $birthday = Carbon::createFromDate($student['birthdayYear'], $student['birthdayMonth'], $student['birthdayDate'], 'Asia/Ho_Chi_Minh');
+                    $input->birthday = $birthday;
+                    $input->fullname = $student['fullname'];
+                    $input->gender =$student['gender'];
+                    $input->phone =$student['phone'];
+                    $input->lophoc_id = $class[0]->id;
+                    $input->save();
+                    $input->touch();
+                }
+//
+
 
             $count++;
 //                DB::insert('insert into students (email, name, password,fullname,gender,phone) values (?, ?, ?, ?, ?, ?)', [$student['email'], $student['name'], $student['password'], $student['email'], $student['fullname'], $student['gender'], $student['phone']]);
@@ -157,8 +165,8 @@ class StudentManageController extends Controller
         }
         return response()->json([
             "message" => "Created success",
-            "Total created" => $count,
-//            "class" => $class[0]->id
+            "count" => $count,
+//            "class" => count($class)
         ]);
 
 
